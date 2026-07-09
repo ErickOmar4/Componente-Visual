@@ -1,7 +1,7 @@
 # Componente-Visual
 Intrituto tecnologico de oaxaca
 
-![escuela](img_programa/imlogoTecNM2.png)
+![escuela](img_programa/image.png)
 
 Alumno: santiago ramirez erick omar 
 Profesora: Programacion Web
@@ -28,9 +28,9 @@ el componente visual hecho con el archivo js sirve para crear un carrusel de ima
 el metodo de stopIntervalo() devitene el evento playIntervalo() para poder vanzar las imagenes nuevamnete 1 por 1
 
 
-Estructura e Instalación
+# Estructura e Instalación
 
-La arquitectura del proyecto está distribuida en capas independientes. Para integrarlo en tu servidor local o entorno web, incluye los archivos en tu documento HTML respetando el orden de dependencia de los scripts:
+La arquitectura del proyecto está distribuida en capas independientes. Para integrarlo en tu servidor local o entorno web, incluye los archivos en tu documento HTML medinate las estiquetas script respetando el orden de dependencia de los scripts:
 
 ```html
 <!-- Estilos visuales del contenedor y transiciones -->
@@ -41,12 +41,44 @@ La arquitectura del proyecto está distribuida en capas independientes. Para int
 
 <!-- Capa 2: Controlador de eventos e interfaz (Core) -->
 <script src="js/carrusel.js"></script>
-
+```
 Instalación y Configuración
 
-Para integrar las validaciones en tu proyecto, puedes copiar el archvo utileriajs que se encuentra en la carpeta js y hacer referencia del archivo en el pie de tu documento HTML antes del cierre de la etiqueta `</body>`:
-```
+Para integrar las validaciones en tu proyecto, puedes copiar el archvo utileria.js que se encuentra en la carpeta js y hacer referencia del archivo en el pie de tu documento HTML antes del cierre de la etiqueta `</body>`:
 
+para ingresar el siguiente html para tener los componentes que usa el archivo  carrusel.js
+```
+<div class="carousel">
+        <button class="btn-cuadrado" id="retroceder"></button>
+        <div id="imagen">
+            <div id="info-imagen"></div>
+        </div>
+        <button class="btn-cuadrado" id="avanzar"></button>
+    </div>
+
+    <div class="controles">
+        <button id="play"> Avanzar </button>
+        <button id="stop"> Detener</button>
+    </div>
+```
+para ingresar las fotos que quieres en tu carrusel tienes que agregarlas en const IMAGENES que se encuentra en el carrusel.js, para ello ingresas en la url la direccion de la imagen y desc: que es la descripcion que aparece en la parte inferior de la imagen
+
+```
+const IMAGENES = [
+        { 
+            url: 'img/atardecer.jpg',
+            desc: 'Atardecer en la playa'
+        },
+        { 
+            url: 'img/paisajes-de-mexico.jpg',
+            desc: 'Bonito paisaje México'
+        },
+        { 
+            url: 'img/parque-nacional-banff.jpg',
+            desc: 'Parque Nacional Banff - Montañas y lagos'
+        }
+    ];
+```    
 
 en este proyecto tambien se gregan las imagenes que se usan en el carrusel en la carpeta img
 el estilo css aplicado en lac carpeta css  archivo carrusel.css
@@ -56,6 +88,8 @@ y la estructura de la pagina en el index.html
 
 funciones principales 
 Estas funciones se encargan de calcular de forma matemática hacia qué índice debe moverse el carrusel, controlando los límites del arreglo de forma circular sin interactuar con elementos HTML.
+
+funcion calcularSiguientePosicion
 ```
 /** Calcula la siguiente posición del carrusel. Si llega al final del array, reinicia a 0.*/
 function calcularSiguientePosicion(posicionActual, totalImagenes) {
@@ -65,7 +99,8 @@ function calcularSiguientePosicion(posicionActual, totalImagenes) {
 /*Calcula la posición anterior del carrusel. Si está en el índice 0, salta al último elemento.*/
 function calcularAnteriorPosicion(posicionActual, totalImagenes) {
     return (posicionActual <= 0) ? totalImagenes - 1 : posicionActual - 1;
-}```
+}
+```
 
 Gestión de Estado y Autoplay (js/carrusel.js)
 
@@ -84,4 +119,5 @@ function playIntervalo() {
     $botonRetroceder.disabled = true;
     $botonPlay.disabled = true;
     $stopButton.disabled = false;
-}```
+}
+```
